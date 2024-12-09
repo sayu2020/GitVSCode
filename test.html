@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS and JavaScript</title>
+  </head>
+  <body>
+    <div id="myDiv">Hello, World!</div>
+    <button onclick="changeStyle()">Change Style</button>
+
+    <script>
+      function changeStyle() {
+        var div = document.getElementById("myDiv");
+        div.style.color = "blue"; // Change text color to blue
+        div.style.fontSize = "20px"; // Change font size to 20px
+        div.style.backgroundColor = "yellow"; // Change background color to yellow
+      }
+    </script>
+  </body>
+</html>
