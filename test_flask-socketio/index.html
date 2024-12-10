@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  </head>
+  <body>
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        var socket = io.connect(
+          "http://" + document.domain + ":" + location.port
+        );
+
+        socket.on("receive_message", function (data) {
+          const messageBox = document.getElementById("messages");
+          messageBox.innerHTML += "<p><b>Bot:</b> " + data.message + "</p>";
+        });
+
+        document
+          .getElementById("send-button")
+          .addEventListener("click", function () {
+            const userMessage = document.getElementById("user-message").value;
+            socket.emit("send_message", { message: userMessage });
+
+            document.getElementById("user-message").value = "";
+          });
+      });
+    </script>
+
+    <h2>Chatbot</h2>
+    <div id="messages"></div>
+    <textarea id="user-message"></textarea>
+    <button id="send-button">Send</button>
+  </body>
+</html>
