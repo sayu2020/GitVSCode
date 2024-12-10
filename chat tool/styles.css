@@ -1,0 +1,99 @@
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    width: 1200px; /* Increase the width here */
+    max-width: 100%;
+    height: 80vh;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.message {
+    margin: 15px 0;
+    padding: 12px 20px;
+    border-radius: 12px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 1.1em;
+}
+
+.user {
+    background: #5ce7db;
+    color: white;
+    align-self: flex-end;
+    border-top-right-radius: 0;
+}
+
+.assistant {
+    background: #79d1fd;
+    color: white;
+    align-self: flex-start;
+    border-top-left-radius: 0;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 2px solid #f1f1f1;
+}
+
+#user-input {
+    width: 80%;
+    padding: 12px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    font-size: 1.1em;
+    transition: border-color 0.3s;
+}
+
+#user-input:focus {
+    border-color: #343835;
+    outline: none;
+}
+
+button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #6d746f;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #6d746f;
+}

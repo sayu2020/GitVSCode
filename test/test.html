@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS with JavaScript</title>
+    <style>
+      .hover-effect {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        transition: all 0.3s;
+      }
+      .hover-effect:hover {
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hover-effect"></div>
+
+    <script>
+      document
+        .querySelector(".hover-effect")
+        .addEventListener("click", function () {
+          this.style.backgroundColor = "red"; // Change color on click
+        });
+    </script>
+  </body>
+</html>
