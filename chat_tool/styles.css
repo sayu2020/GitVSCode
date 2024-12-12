@@ -18,7 +18,7 @@ body {
 .chat-container {
     display: flex;
     flex-direction: column;
-    width: 1200px; /* Increase the width here */
+    width: 1200px;
     max-width: 100%;
     height: 80vh;
     background-color: #ffffff;
@@ -47,14 +47,14 @@ body {
 }
 
 .user {
-    background: #5ce7db;
+    background: #b09beb;
     color: white;
     align-self: flex-end;
     border-top-right-radius: 0;
 }
 
 .assistant {
-    background: #79d1fd;
+    background: #a6ebdc;
     color: white;
     align-self: flex-start;
     border-top-left-radius: 0;

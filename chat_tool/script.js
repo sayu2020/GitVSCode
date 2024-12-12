@@ -19,7 +19,7 @@ function sendMessage() {
 
 // Function to send messages to the Flask server for saving
 function saveMessageToServer(userMessage, assistantMessage) {
-    fetch('http://localhost:5000/save_chat', {
+    fetch('http://localhost:8080/save_chat', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ function saveMessageToServer(userMessage, assistantMessage) {
 
 // Function to load and display the chat history from the server
 function loadChatHistory() {
-    fetch('http://localhost:5000/get_chat_history')
+    fetch('http://localhost:8080/get_chat_history')
         .then(response => response.json())
         .then(data => {
             data.forEach(chat => {
