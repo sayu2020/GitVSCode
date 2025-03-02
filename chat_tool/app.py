@@ -9,7 +9,7 @@ db = SQLAlchemy(app)
 CORS(app)
 
 # Set OpenAI API Key
-openai.api_key = ''
+openai.api_key = 'Your Key'
 
 # Define the database model for chat history
 class ChatHistory(db.Model):
@@ -27,7 +27,7 @@ def get_openai_response():
     user_prompt = request.json.get('user_prompt')
 
     try:
-        #test
+        # test
         response ={
             "choices": [
                 {
@@ -39,7 +39,7 @@ def get_openai_response():
             ]
         }
 
-        #Request OpenAI API for response using gpt-3.5-turbo
+        # #Request OpenAI API for response using gpt-3.5-turbo
         # response = openai.ChatCompletion.create(
         #     model="gpt-3.5-turbo", 
         #     messages=[
