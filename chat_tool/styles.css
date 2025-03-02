@@ -95,10 +95,10 @@ button {
     transition: background-color 0.3s;
 }
 
-label {
+/* label {
     margin-bottom: 10px;
     font-size: 14px;
-  }
+  } */
 
 button:hover {
     background-color: #6d746f;
