@@ -7,7 +7,8 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+    /* background: linear-gradient(to bottom right, #f9c795, #f6b532); */
+    background-image: url(backGround_cozyStudy.jpg);
     color: #333;
     display: flex;
     justify-content: center;
@@ -21,7 +22,7 @@ body {
     width: 1200px;
     max-width: 100%;
     height: 80vh;
-    background-color: #ffffff;
+    background-color: #ffffff80;
     border-radius: 15px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -31,7 +32,7 @@ body {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
-    background-color: #f8f8f8;
+    background-color: #f8f8f843;
     border-radius: 15px;
     margin-bottom: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
@@ -47,15 +48,15 @@ body {
 }
 
 .user {
-    background: #b09beb;
-    color: white;
+    background: #02915a7b;
+    color: rgb(55,55,55);
     align-self: flex-end;
     border-top-right-radius: 0;
 }
 
 .assistant {
-    background: #a6ebdc;
-    color: white;
+    background: #955a0178;
+    color: rgb(55,55,55);
     align-self: flex-start;
     border-top-left-radius: 0;
 }
@@ -64,7 +65,7 @@ body {
     display: flex;
     align-items: center;
     padding: 10px;
-    background-color: #fff;
+    background-color: #ffffff9a;
     border-top: 2px solid #f1f1f1;
 }
 
@@ -72,20 +73,20 @@ body {
     width: 80%;
     padding: 12px;
     border-radius: 25px;
-    border: 1px solid #ddd;
+    border: 1px solid #ddddddc4;
     font-size: 1.1em;
     transition: border-color 0.3s;
 }
 
 #user-input:focus {
-    border-color: #343835;
+    border-color: #4245435b;
     outline: none;
 }
 
 button {
     margin-left: 10px;
     padding: 10px 15px;
-    background-color: #6d746f;
+    background-color: #70747185;
     color: white;
     border: none;
     border-radius: 25px;
@@ -93,6 +94,11 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
+label {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
 
 button:hover {
     background-color: #6d746f;
