@@ -60,8 +60,13 @@ function getMillisecondsUntilUserTime(userTimeString) {
 }
 
 // Function to send message and save it on the server
-async function sendMessage() {
+async function sendMessage(userInfo) {
     let userMessage = document.getElementById('user-input').value;
+    let userPrompt;
+    let assistantMessage;
+    let millisecondsUntilUserTime;
+    let nextStudyDT;
+
     chatCnt = chatCnt + 1;
 
     // Check if the input box is empty
@@ -74,31 +79,31 @@ async function sendMessage() {
     displayMessage(userMessage, 'user');
 
     if (chatCnt == 1) {
-        userSubject = userMessage;
-        assistantMessage = 'When was your most recent ' + userSubject + ' exam? ex)' + new Date().toLocaleDateString('ja-JP') ;
+        userInfo.subject = userMessage;
+        assistantMessage = 'When was your most recent ' + userInfo.subject + ' exam? ex)' + new Date().toLocaleDateString('ja-JP') ;
     } else if (chatCnt == 2) {
-        lastExamDate = userMessage;
-        assistantMessage = 'What score did you get in the ' + userSubject + ' exam?';
+        userInfo.lastExamDate = userMessage;
+        assistantMessage = 'What score did you get in the ' + userInfo.subject + ' exam?';
     } else if (chatCnt == 3) {
-        lastExamScore = userMessage;
+        userInfo.lastExamScore = userMessage;
         assistantMessage = "What was included in the exam?\n*If you don't know the name of the topic, you can write some example question!";
     } else if (chatCnt == 4) {
-        userTopic = userMessage;
-        createPrompt(userMessage);
-        await getAssistantResponse(userPrompt);
+        userInfo.topic = userMessage;
+        userPrompt = createPrompt(userMessage,userInfo);
+        assistantMessage = await getAssistantResponse(userPrompt);
         assistantMessage = assistantMessage + '\nWhen are you available? ex)' + new Date().toLocaleDateString('ja-JP') + ' ' + new Date().toLocaleTimeString('ja-JP').substring(0,5);
     } else if (chatCnt == 5) {
         millisecondsUntilUserTime = getMillisecondsUntilUserTime(userMessage);
         // Set the notification to trigger at the user-specified time
         setTimeout(() => {
-            showNotification(userName +'! Time to study'+ userSubject+'!');
+            showNotification(userName +'! Time to study'+ userInfo.subject+'!');
         }, millisecondsUntilUserTime);
         nextStudyDT = new Date(new Date().getTime() + millisecondsUntilUserTime);
         nextStudyDT = nextStudyDT.toLocaleDateString('ja-JP') + ' ' + nextStudyDT.toLocaleTimeString('ja-JP').substring(0,5);
         assistantMessage = 'Cool! See you at ' + nextStudyDT + '!';
     } else {
         userPrompt = userMessage;
-        await getAssistantResponse(userPrompt); 
+        assistantMessage = await getAssistantResponse(userPrompt); 
     }
 
     // Display the assistant message
@@ -109,21 +114,26 @@ async function sendMessage() {
 
     // Clear the input box after sending the message
     document.getElementById('user-input').value = '';
+
+    return userInfo;
 }
 
 
 // Function to send messages to the Flask server for saving
-function createPrompt(userMessage){
+function createPrompt(userMessage,userInfo){
+    let Prompt;
     if(chatCnt == 4){
-        userPrompt = 'My grade:' + userGreade + '\nSubject I want to study today:' + userSubject + '\nScore of the subject in the last exam:' + lastExamScore + '\nTopic I want to study today:' + userTopic + '\nTo improve my score, How many hours should I study? Please create study steps and schedules.';
+        Prompt = 'My grade:' + userInfo.greade + '\nSubject I want to study today:' + userInfo.subject + '\nScore of the subject in the last exam:' + userInfo.lastExamScore + '\nTopic I want to study today:' + userInfo.topic + '\nTo improve my score, How many hours should I study? Please create study steps and schedules.';
     } else {
-        userPrompt = userMessage;
+        Prompt = userMessage;
     }
+    return Prompt;
 }
 
 
 // Fetch the assistant's response from the Flask server
 async function getAssistantResponse(userPrompt) {
+    let assistantMessage;
     try {
         const response = await fetch('http://localhost:5000/get_openai_response', {
             method: 'POST',
@@ -143,6 +153,7 @@ async function getAssistantResponse(userPrompt) {
     } catch (error) {
         console.error('Error:', error);
     }
+    return assistantMessage;
 }
 
 
@@ -195,24 +206,14 @@ function displayMessage(messageText, sender) {
 
 // Show first message when the page is loaded
 let chatCnt =0;
-const userName = 'Kazuki';
-const userGreade = '7th greade';
-const firstMessage = 'Welcome back '+ userName +'!\nWhat do you want to studay today?'
-let assistantMessage = '';
-let userSubject = '';
-let userTopic = '';
-let lastExamDate = '';
-let lastExamScore = '';
-let userPrompt = '';
-let millisecondsUntilUserTime = '';
-let nextStudyDT = '';
-displayMessage(firstMessage, 'assistant');
+let userInfo = {name: 'Kazuki', greade: '7th greade'};
+displayMessage('Welcome back '+ userInfo.name +'!\nWhat do you want to study today?', 'assistant');
 
 // Event listener for the 'Enter' key
 document.getElementById('user-input').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
         event.preventDefault();  // Prevent default Enter behavior (e.g., form submission)
-        sendMessage();           // Send the message
+        sendMessage(userInfo);           // Send the message
     }
 });
 
