@@ -11,6 +11,7 @@ CORS(app)
 # Set OpenAI API Key
 openai.api_key = '*Your API Key*'
 
+
 # Define the database model for chat history
 class ChatHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
