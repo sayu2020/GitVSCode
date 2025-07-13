@@ -206,7 +206,7 @@ function displayMessage(messageText, sender) {
 
 // Show first message when the page is loaded
 let chatCnt =0;
-let userInfo = {name: 'Kazuki', greade: '7th greade'};
+let userInfo = {name: 'Ken', greade: '7th greade'};
 displayMessage('Welcome back '+ userInfo.name +'!\nWhat do you want to study today?', 'assistant');
 
 // Event listener for the 'Enter' key

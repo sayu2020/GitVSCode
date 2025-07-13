@@ -9,7 +9,7 @@ db = SQLAlchemy(app)
 CORS(app)
 
 # Set OpenAI API Key
-openai.api_key = 'Your Key'
+openai.api_key = '*Your API Key*'
 
 # Define the database model for chat history
 class ChatHistory(db.Model):
@@ -33,7 +33,7 @@ def get_openai_response():
                 {
                     "message": {
                         "role": "assistant",
-                        "content": "assistant response yo:\n Doing great!"
+                        "content": "AI assistant response:\n Enter your API key, comment out the #test section, and uncomment the #Request OpenAI... section, then the AI's response will be displayed here."
                     }
                 }
             ]
